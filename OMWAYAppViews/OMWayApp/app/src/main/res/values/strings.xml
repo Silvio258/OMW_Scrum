@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">OMWay</string>
+    <string name="error_input_vacio">No se aceptan campos vacios</string>
+    <string name="error_email_invalido">Porfavor ingrese un correo válido</string>
+    <string name="error_telefono_invalido">Porfavor ingrese un telefono válido</string>
+    <string name="error_passwordConfirmar_incorrecto">Las contraseñas no coinciden</string>
+    <string name="error_credenciales_invalidos">El CIF o la contraseña esta incorrecto</string>
+    <string name="registracion_exitoso">Registrado exitosamente</string>
+    <string name="login_exitoso">Accedido exitosamente</string>
+    <string name="error_unknown">An unknown error occurred</string>
+</resources>

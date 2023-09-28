@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="menta_importante">#82E8E1</color>
+    <color name="fondo">#121212</color>
+    <color name="txt_fields">#222121</color>
+    <color name="texto_general">#FFFFFF</color>
+    <color name="texto_opacidad">#C3C3C3</color>
+    <color name="rating_estrellas">#D3D800</color>
+    <color name="bg_terminosCondiciones">#212020</color>
+    <color name="aceptarsolicitud">#117A00</color>
+    <color name="rechazarsolicitud">#BB0303</color>
+</resources>
