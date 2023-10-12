@@ -30,6 +30,8 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.Dp
 
 import androidx.compose.ui.unit.DpSize
@@ -76,10 +78,44 @@ fun InputField(
         shape = RoundedCornerShape(10.dp)
     )
 
-
-
+}
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun PasswordField(
+    modifier: Modifier = Modifier,
+    iconModifier: Modifier = Modifier,
+    valueState: MutableState<String>,
+    labelId: String,
+    icon: Painter,
+    enabled: Boolean,
+    isSingleLine: Boolean,
+    visualTransformation: VisualTransformation,
+    keyboardType: KeyboardType,
+    imeAction: ImeAction = ImeAction.Go,
+    onAction: KeyboardActions,
+    backgroundColor:Color = TxtFields,
+    textColor:Color = TextoGeneral,
+    iconDp:Dp = 20.dp,
+    maxLines:Int = 4
+){
+    TextField(value = valueState.value , onValueChange = {valueState.value = it},
+        modifier = modifier.padding(5.dp),
+        label ={ Text(text = labelId)},
+        leadingIcon = {Icon(painter = icon, contentDescription = "Text Field Icon",modifier = iconModifier.size(iconDp))},
+        singleLine = isSingleLine,
+        maxLines = maxLines,
+        textStyle = TextStyle(fontSize = 16.sp, color = Color.White),
+        enabled = enabled,
+        visualTransformation = PasswordVisualTransformation(),
+        keyboardOptions = KeyboardOptions(keyboardType = keyboardType, imeAction = imeAction),
+        keyboardActions = onAction,
+        colors = TextFieldDefaults.textFieldColors(containerColor = backgroundColor,focusedLabelColor = textColor, unfocusedLabelColor = textColor,
+            disabledTextColor = textColor, disabledLeadingIconColor = Color.Gray, disabledTrailingIconColor = Color.Gray, disabledLabelColor = textColor),
+        shape = RoundedCornerShape(10.dp)
+    )
 
 }
+
 @Composable
 fun CustomButton(
     modifier: Modifier = Modifier,

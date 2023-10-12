@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.material.Surface
+import androidx.compose.material.TextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -26,6 +27,7 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -36,6 +38,7 @@ import com.main.omwayapp.apirest.dto.omwayuser.RiderDto
 import com.main.omwayapp.apirest.viewmodel.omwayuser.rider.RiderItemViewModel
 import com.main.omwayapp.ui.components.CustomButtonG
 import com.main.omwayapp.ui.components.InputField
+import com.main.omwayapp.ui.components.PasswordField
 
 import com.main.omwayapp.ui.navigationApp.AppScreens
 import com.main.omwayapp.ui.theme.Fondo
@@ -131,7 +134,7 @@ fun RegisterRider(navController: NavController ) {
                     icon = painterResource(id = R.drawable.id),
                     enabled = true,
                     isSingleLine = true,
-                    keyboardType = KeyboardType.Text,
+                    keyboardType = KeyboardType.Number,
                     onAction = KeyboardActions {
                         keyBoardController?.hide()
                     }
@@ -182,7 +185,7 @@ fun RegisterRider(navController: NavController ) {
                     icon = painterResource(id = R.drawable.telefono),
                     enabled = true,
                     isSingleLine = true,
-                    keyboardType = KeyboardType.Text,
+                    keyboardType = KeyboardType.Number,
                     onAction = KeyboardActions {
                         keyBoardController?.hide()
                     }
@@ -190,7 +193,8 @@ fun RegisterRider(navController: NavController ) {
 
                 Spacer(modifier = Modifier.height(7.dp))
 
-                InputField(
+
+                PasswordField(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(horizontal = 18.dp, vertical = 4.dp)
@@ -200,14 +204,15 @@ fun RegisterRider(navController: NavController ) {
                     icon = painterResource(id = R.drawable.password),
                     enabled = true,
                     isSingleLine = true,
-                    keyboardType = KeyboardType.Text,
+                    visualTransformation = PasswordVisualTransformation(),
+                    keyboardType = KeyboardType.Password,
                     onAction = KeyboardActions {
                         keyBoardController?.hide()
                     }
                 )
                 Spacer(modifier = Modifier.height(7.dp))
-
-                InputField(
+                
+                PasswordField(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(horizontal = 18.dp, vertical = 4.dp)
@@ -217,7 +222,8 @@ fun RegisterRider(navController: NavController ) {
                     icon = painterResource(id = R.drawable.password),
                     enabled = true,
                     isSingleLine = true,
-                    keyboardType = KeyboardType.Text,
+                    visualTransformation = PasswordVisualTransformation(),
+                    keyboardType = KeyboardType.Password,
                     onAction = KeyboardActions {
                         keyBoardController?.hide()
                     }

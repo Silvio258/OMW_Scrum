@@ -533,7 +533,7 @@ fun Mapa(navController: NavHostController) {
     ) {
         Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
             //TestMap()
-            OurGoogleMaps(uam) {}
+            //OurGoogleMaps(uam) {}
         }
 
 
