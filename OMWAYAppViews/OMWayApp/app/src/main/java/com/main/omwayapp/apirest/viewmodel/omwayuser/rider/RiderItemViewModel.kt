@@ -41,4 +41,12 @@ class RiderItemViewModel:ViewModel() {
             _riderState.update {true}
         }
     }
+
+    fun findRider(item: String){
+        viewModelScope.launch {
+            repositoryRider.findByCif(item)
+            _riderState.update {true}
+        }
+
+    }
 }

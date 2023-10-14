@@ -1,6 +1,7 @@
 package com.main.omwayapp.ui.screens.rider.register
 
 import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -11,6 +12,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.material.AlertDialog
 import androidx.compose.material.Surface
 import androidx.compose.material.TextField
 import androidx.compose.material3.Text
@@ -23,6 +25,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -36,6 +39,7 @@ import androidx.navigation.NavController
 import com.main.omwayapp.R
 import com.main.omwayapp.apirest.dto.omwayuser.RiderDto
 import com.main.omwayapp.apirest.viewmodel.omwayuser.rider.RiderItemViewModel
+import com.main.omwayapp.ui.components.CustomAlertDialog
 import com.main.omwayapp.ui.components.CustomButtonG
 import com.main.omwayapp.ui.components.InputField
 import com.main.omwayapp.ui.components.PasswordField
@@ -46,6 +50,7 @@ import com.main.omwayapp.ui.theme.IBMplexSans
 import com.main.omwayapp.ui.theme.MentaImportante40
 import com.main.omwayapp.ui.theme.TextOpacidad
 import com.main.omwayapp.ui.theme.TextoGeneral
+
 
 
 @OptIn(ExperimentalComposeUiApi::class)
@@ -70,7 +75,7 @@ fun RegisterRider(navController: NavController ) {
     var confirmpass = remember {
         mutableStateOf("")
     }
-
+    var context = LocalContext.current;
 
     val riderItemModel: RiderItemViewModel = viewModel()
     val riderItemState by riderItemModel._riderState.collectAsState()
@@ -240,11 +245,46 @@ fun RegisterRider(navController: NavController ) {
                 text = "Regístrate",
                 fontSize = 20.sp
             ) {
-                if(password.value == confirmpass.value){
+                var lengthcif=cif.toString().length;
+                var lengthpass=password.toString().length
+                var lengthphone=phone.toString().length
+                var exists=0
+                var letterOrNumberCount = 0;
+                var specialCharacterCount = 0;
+                var goodPassword=false;
+
+                for (char in password.value) {
+                    if (char.isLetter() || char.isDigit()) {
+                        letterOrNumberCount++
+                    } else if (char.isSpecialCharacter()) {
+                        specialCharacterCount++
+                    }
+                }
+                if(letterOrNumberCount==8 && specialCharacterCount==1){
+                    goodPassword=true;
+                }
+               // Log.d("EXISTE", riderItemModel.findRider(cif.value).toString())
+        /*
+                if(cif.value==riderItemModel.findRider(cif.value).toString()){
+                exists=1;
+                    Log.d("EXISTE","ya existe ese cif")
+                }
+
+         */
+
+                if(password.value == confirmpass.value && lengthcif==38 && lengthpass==39 && lengthphone==38 && exists==0 && goodPassword){
                     riderItemModel.saveRider(RiderDto(cif.value,password.value,name.value, phone.value,email.value,state = true))
                 }
                 else{
-                    Log.d("CUSTOMERROR","Mala contraseña")
+                    Toast.makeText(context,"No ha ingresado los datos correctamente",Toast.LENGTH_LONG).show()
+                    Log.d("cif",lengthcif.toString())
+                    Log.d("pass",lengthpass.toString())
+                    Log.d("phone",lengthphone.toString())
+                    Log.d("exist",exists.toString())
+                    Log.d("passwordgood",goodPassword.toString())
+                    Log.d("NormalCount",letterOrNumberCount.toString())
+                    Log.d("SpecialCount",specialCharacterCount.toString())
+                    Log.d("CUSTOMERROR","La contraseña no coincide")
                 }
             }
 
@@ -285,3 +325,16 @@ fun RegisterRider(navController: NavController ) {
         }
     }
 }
+
+@Composable
+fun Error(){
+    CustomAlertDialog(title = "ERROR", msg ="Las contraseñas no coinciden" ) {
+
+    }
+}
+
+fun Char.isSpecialCharacter(): Boolean {
+    val specialCharacters = "!@#$%^&*()-_+=[]{}|;:'\",.<>/?".toCharArray()
+    return this in specialCharacters
+}
+

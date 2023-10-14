@@ -21,6 +21,7 @@ public class ServiceRider implements IServiceRider {
         return repositoryRider.findAll();
     }
 
+
     @Override
     public Rider findRiderByCif(String cif) {
         Optional<Rider> r1 = repositoryRider.findById(cif);
